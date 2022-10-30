@@ -1,0 +1,50 @@
+
+<script>
+    const a=document.getElementById('add')
+    a.innerText="Add"
+    function add_or_edit(){
+        const a=document.getElementById('add')
+        if (a.innerText=="Add"){
+            const f=document.getElementById('todo_form');
+            f.action="{% url 'create' %}"
+
+        }
+        if(a.innerText=="Save Changes"){
+            const f=document.getElementById('todo_form');
+            f.action="{% url 'save_edited' %}"
+
+        }
+    }
+</script>
+<form class="container py-5 d-flex justify-content-center" method="POST" action="" id="todo_form">
+    {% csrf_token %}
+  <input type="text" name="todo" id="todo" placeholder="Enter your todo text here..." class="w-75 p-3 form-control" value="">
+  <button type="submit" class="btn btn-primary px-5 mx-2" id="add" onclick="add_or_edit()">Add</button>
+  <input type="hidden" name="todo_id" id="todo_id" value="">
+  <input type="hidden" name="todo_text3" id="todo_text3" value="">
+  
+</form>
+{% for u in t %}
+<form class="container border p-3 w-lg-50" method="GET">
+    <p id="todo_text{{u.id}}" name="todo_text{{u.id}}">{{u.text}}</p>
+    <input type="hidden" name="todo_text1{{u.id}}" id="todo_text1{{u.id}}" value="">
+    <div>
+        
+        <a class="btn btn-secondary" id="edit_todo" onclick="const e=document.getElementById('todo_text{{u.id}}');const todo=document.getElementById('todo');todo.value=e.textContent;const t_id=document.getElementById('todo_id');t_id.value='{{u.id}}';const t_txt=document.getElementById('todo_text3');t_txt.value='{{u.text}}';const ca=document.getElementById('add');ca.innerText='Save Changes';" 
+        data-text="{{u.text}}" data-id="{{u.id}}">Edit</a>
+        <a class="btn btn-danger" href="{% url 'delete_todo' u.id %}">Delete</a>
+        
+    
+        
+        
+        
+
+    </div>
+
+</form>
+{% endfor %}
+
+
+
+
+
