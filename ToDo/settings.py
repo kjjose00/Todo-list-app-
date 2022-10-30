@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["todoappnewversion.herokuapp.com","localhost"]
+ALLOWED_HOSTS = ["todoappnewversion.herokuapp.com"]
 
 
 # Application definition
@@ -129,3 +129,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user.CustomUser'
 
 AUTHENTICATION_BACKENDS = ['user.backends.EmailBackend']
+
+CSRF_TRUSTED_ORIGINS = ['https://todoappnewversion.herokuapp.com']
